@@ -1,0 +1,16 @@
+{
+  "name": "mpesa-contacts",
+  "version": "0.1.0",
+  "description": "Extract customer contacts from an unsecured mpesa statement.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "mpesa-statement",
+    "12-digit-contacts",
+    "phone-numbers"
+  ],
+  "author": "karanja1victor",
+  "license": "ISC"
+}
