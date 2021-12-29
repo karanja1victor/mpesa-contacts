@@ -12,5 +12,9 @@
     "phone-numbers"
   ],
   "author": "karanja1victor",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "fast-csv": "^4.3.6",
+    "pdf-parse": "^1.1.1"
+  }
 }
