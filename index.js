@@ -11,7 +11,7 @@ module.exports = MpesaStatement;
 // MpesaStatement Object
 
 function MpesaStatement (statementPath) {
-  this.statementPath = this.statementPath;
+  this.statementPath = statementPath;
   this.getFullStatement = async () => {
     let data = await readFile(this.statementPath);
     let parsed = await pdf(data);
