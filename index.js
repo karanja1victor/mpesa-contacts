@@ -44,7 +44,25 @@ function MpesaStatement (statementPath) {
     return contacts;
   }
   this.getAllContacts = async () => {
-    //code block
+    let tenParsed = await this.getFullStatement();
+    let tenPdfLines = tenParsed.split("\n");
+    let contacts = await this.getTwelveDigitContacts();
+    tenPdfLines.forEach((line, index) => {
+        let tenRegex = /\b\d{10}\b([\s\S]*)$/gm;
+        let tenPhoneRegex = /\b\d{10}\b/gm;
+        let tenNameRegex = /[a-zA-Z ]+/gm;
+        let tenContact = line.match(tenRegex);
+        if(tenContact) {
+            let tenStringContact = tenContact.join("");
+            let tenPhoneNumber = tenStringContact.match(tenPhoneRegex).join("");
+            let tenCell = Number(tenPhoneNumber) + 254000000000 ;
+            let tenName = tenPdfLines[index+1].match(tenNameRegex);
+            if(!(contacts.hasOwnProperty(tenCell))  && tenName.length == 1){
+                contacts[tenCell ] = tenName.join("").trim().toUpperCase();
+            }
+        }
+    });
+    return contacts;
   }
   this.makeCsvContacts = async () => {
     //code block.
