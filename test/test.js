@@ -17,6 +17,7 @@ describe("MpesaStatement", function () {
   });
   describe("#getTwelveDigitContacts", function (){
     it("should return an object with twelve digit contacts as the keys.");
+    });
   });
   describe("#getAllContacts", function(){
     it("should return an object with both twelve digit contacts and ten digit contacts as the keys.");

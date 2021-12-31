@@ -19,6 +19,29 @@ function MpesaStatement (statementPath) {
   }
   this.getTwelveDigitContacts = async () => {
     //code block
+    let parsed = await this.getFullStatement();
+    let pdfLines = parsed.split("\n");
+    let contacts = {};
+    pdfLines.forEach((line, index) => {
+        let regex = /\b\d{12}\b([\s\S]*)$/gm;
+        let phoneRegex = /\b\d{12}\b/gm;
+        let nameRegex = /[a-zA-Z ]+/gm;
+        let contact = line.match(regex);
+        if(contact) {
+            let stringContact = contact.join("");
+            let phoneNumber = stringContact.match(phoneRegex).join("");
+            let nextLineName = pdfLines[index+1].match(nameRegex);
+            let name = stringContact.match(nameRegex).join("").trim().toUpperCase();
+            let otherName = "";
+            if(nextLineName.length ===1 ){
+                otherName = nextLineName.join("").trim().toUpperCase();
+            }
+            if(!(contacts.hasOwnProperty(phoneNumber))){
+                contacts[phoneNumber ] = `${name} ${otherName}` ;
+            }
+        }
+    });
+    return contacts;
   }
   this.getAllContacts = async () => {
     //code block
