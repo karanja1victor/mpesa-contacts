@@ -10,6 +10,11 @@ $ npm install mpesa-contacts
 
 let MpesaStatement = require("mpesa-contacts");
 let decStatement = new MpesaStatement("path-to-statement/statement.pdf");
-console.log(decStatement.fullContacts());
+
+//returns all contacts in an object
+let decContacts = decStatement.getAllContacts();
+
+//makes a csv file, contacts.csv in your parent directory
+decStatement.makeCsvContacts();
 
 ```
