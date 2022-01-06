@@ -22,6 +22,6 @@ describe("MpesaStatement", function () {
     it("should return an object with both twelve digit contacts and ten digit contacts as the keys.");
   });
   describe("#makeCsvContacts", function(){
-    it("should take in a template and fill it with data from #getAllContacts");
+    it("should make a csv file and fill it with data from #getAllContacts");
   });
 });

@@ -1,6 +1,7 @@
 // load dependencies
 
 const { readFile } = require('fs').promises;
+const { createReadStream, createWriteStream } = require('fs');
 const path = require('path');
 const pdf = require('pdf-parse');
 const csv = require('fast-csv');
@@ -64,7 +65,24 @@ function MpesaStatement (statementPath) {
     });
     return contacts;
   }
-  this.makeCsvContacts = async () => {
-    //code block.
-  }
+  this.makeCsvContacts = async function() {
+    let contacts = await this.getAllContacts();
+    let writeStream = createWriteStream(path.resolve(__dirname,  "contacts.csv"));
+        const csvStream = csv.format({ headers: true });
+        Object.entries(contacts).forEach((contactInfo) => {
+            let firstName = contactInfo[1].split(" ")[0];
+            let middleName = contactInfo[1].split(" ")[1];
+            let lastName = contactInfo[1].split(" ")[2];
+            let phoneNumber = contactInfo[0];
+            csvStream.write({ 'Name' :`${firstName} ${middleName} ${lastName}` , 'Given Name' :`${firstName} ${middleName}` , 'Additional Name' : '',  'Family Name' :`${lastName}` ,
+                        'Yomi Name' :'','Given Name Yomi' :'',  'Additional Name Yomi' :'' , 'Family Name Yomi' :'', 'Name Prefix' :'',
+                        'Name Suffix' : '' ,'Initials' : '' , 'Nickname' : '' , 'Short Name' :'' ,  'Maiden Name': '' ,'Birthday' : '' , 'Gender' : '' , 'Location' : '' ,
+                        'Billing Information' : '' ,'Directory Server' : '' , 'Mileage' : '' , 'Occupation' : '' , 'Hobby' : '' , 'Sensitivity' : '' , 'Priority' : '' , 'Subject' : '' ,
+                        'Notes' : '' , 'Language' : '' , 'Photo' : '' , 'Group Membership' :'* myContacts', 'E-mail 1 - Type' : '' , 'E-mail 1 - Value' : '',
+                        'Phone 1 - Type' : 'Mobile', 'Phone 1 - Value' : `${phoneNumber}`   });
+        });
+        csvStream.pipe(writeStream).on('end', () => process.exit());
+        csvStream.end();
+        return writeStream;
+  }  
 }
