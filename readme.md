@@ -1,4 +1,4 @@
-#MpesaStatement object (with fullContacts method)
+#MpesaStatement object (with getAllContacts method)
 
 This is an npm module created by Victor Karanja to automate phone-number extraction from an unsecured mpesa statement pdf.
 
