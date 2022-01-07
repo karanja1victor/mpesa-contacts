@@ -1,6 +1,6 @@
 {
   "name": "mpesa-contacts",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Extract customer contacts from an unsecured mpesa statement.",
   "main": "index.js",
   "scripts": {
@@ -16,5 +16,17 @@
   "dependencies": {
     "fast-csv": "^4.3.6",
     "pdf-parse": "^1.1.1"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karanja1victor/mpesa-contacts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/karanja1victor/mpesa-contacts/issues"
+  },
+  "homepage": "https://github.com/karanja1victor/mpesa-contacts#readme"
 }
